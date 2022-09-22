@@ -1,60 +1,37 @@
-//
-// Created by 99woo on 2022-09-20.
-//
-
 #include <iostream>
 #include <algorithm>
-#include <vector>
-
+ 
 using namespace std;
-
-int n;
-
-
-void solve() {
-    cin >> n;
-    int tmp;
-    string s;
-    vector<bool> correct(5);
-
-    while (n--) {
-        fill_n(correct.begin(), 5, false);
-        cin >> tmp >> s;
-
-        if (tmp != 5) {
+ 
+void Colourblindness()
+{
+    char colour[2][100];
+    int column;
+    cin >> column;
+ 
+    for(int i = 0; i < 2; i++)
+        for(int j = 0; j < column; j++)
+        {
+            cin >> colour[i][j];
+            if(colour[i][j] == 'B')
+                colour[i][j] = 'G';
+        }
+    
+    for(int i = 0; i < column; i++)
+        if(colour[0][i] != colour[1][i])
+        {
             cout << "NO\n";
-            continue;
+            return;
         }
-
-        for (const auto& ch : s) {
-            switch (ch) {
-                case 'T':
-                    correct[0] = true;
-                    break;
-                case 'i':
-                    correct[1] = true;
-                    break;
-                case 'm':
-                    correct[2] = true;
-                    break;
-                case 'u':
-                    correct[3] = true;
-                    break;
-                case 'r':
-                    correct[4] = true;
-                    break;
-            }
-        }
-
-        if (all_of(correct.begin(), correct.end(), [] (auto x) {return x == true;})) cout << "YES\n";
-        else cout << "NO\n";
-    }
+    cout << "YES\n";
 }
-
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
-
-    solve();
+ 
+int main()
+{
+    int test_case;
+    cin >> test_case;
+    while(test_case-- > 0)
+        Colourblindness();
+ 
+    return 0;
 }
